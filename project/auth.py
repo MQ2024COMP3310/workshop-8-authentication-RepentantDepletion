@@ -39,7 +39,8 @@ def signup_post():
     name = request.form.get('name')
     password = request.form.get('password')
 
-    user = db.session.execute(text('select * from user where email = "' + email + '')).all()
+    db.session.execute(text('select * from user where email = "' + email +'"')).all()
+    user = db.fetchone()
     if len(user) > 0: # if a user is found, we want to redirect back to signup page so user can try again
         flash('Email address already exists')  # 'flash' function stores a message accessible in the template code.
         app.logger.debug("User email already exists")
